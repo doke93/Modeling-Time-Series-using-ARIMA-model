@@ -80,4 +80,3 @@ Points to note:
 ## Fit model to the weekly stock prices 
 
 We now fit an ARIMA model to the weekly stock prices (from mid-2010 to mid-2019) of `Netflix` and learn to evaluate it.
-
