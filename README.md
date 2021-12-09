@@ -77,6 +77,39 @@ Points to note:
 - The p-value is nearly 1 (and equivalently the test statistic is greater than the critical values at all 3 significance levels). So the ADF test result is that the price series is non-stationary.
 - The rolling means and volatility plots are time-varying. So we arrive at the same conclusion by examining the plots.
 - From the ACF, there are significant autocorrelations above the 95% confidence interval at all lags. From the PACF, we have spikes at lags 1, 8, 9, 13, 18, 23 and 38.
+
+We will again check stationarity on log_returns
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145365930-d449a490-f951-4197-8432-d85480e5fd6b.png)
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145366008-9ec4b81f-61d0-44da-bd52-475619fa7f72.png)
+
+Points to note:
+- As per the ADF test results, the `Netflix` returns are stationary since the p-value is almost 0 and the test statistic is less than all the critical values.
+- The returns and rolling means of the returns are all centred around 0. As the time scale increases, the means become more and more constant. At shorter time scales, the noise tends to obscure the signal.
+- The volatily is time-varying at both the faster and slower rolling levels.
+- We can see bristles near or beyond the blue shadow at lags 17 and 26 in the ACF plot and lags 12, 16, 17, 18 and 26 in the PACF plot.
+- Returns are log price differences. So we can also infer from the above two checks, that the price series is integrated with order *1*
 ## Fit model to the weekly stock prices 
 
 We now fit an ARIMA model to the weekly stock prices (from mid-2010 to mid-2019) of `Netflix` and learn to evaluate it.
+
+While creating the ARIMA model class, we select the order arbitrarily (p and q) and we inferred d from the result of above stationarity check
+
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145384839-5b72e9fa-7581-4330-888e-80b3132c8598.png)
+
+Points to note:
+- We chose an ARIMA(3, 1, 2) model to fit the price series of `Netflix`. Equivalently, we could have fit an ARIMA(3, 0, 2) to the returns instead. 
+- The `summary()` method provides the results of the model fitting exercise on the **in-sample data set** (a.k.a. the training data).
+- The most important part is the table at the centre which has the coefficient values, their 95% confidence intervals and their corresponding p-values.
+- However, we also need to run model diagnostics by examining the residual errors closely. This will tell us if our model was a good fit to the underlying data.
+
+#### Diagnosing the residual
+
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145386607-d863fffa-31a6-4255-8c76-ff273e186290.png)
+
+Points to note:
+    
+- `Standardized residuals`: The mean of the residuals is approximately zero. However, it's variance is much higher in the second half of the series.
+- `Distribution of standardized residuals` and `Q-Q plot`: Both plots indicate fatter tails compared to a normal distribution.
+- `ACF plot`: There seems to be serial correlations at lags 8, 13, 14, 22 and a few more. 
+- **If the fit is good, we should see residuals similar to Gaussian white noise. It's not so here.**
+- So we can infer that the model is not a very good fit.
