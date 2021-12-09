@@ -113,3 +113,47 @@ Points to note:
 - `ACF plot`: There seems to be serial correlations at lags 8, 13, 14, 22 and a few more. 
 - **If the fit is good, we should see residuals similar to Gaussian white noise. It's not so here.**
 - So we can infer that the model is not a very good fit.
+
+### Additional Statistical tests
+
+1. *To check for autocorrelations in residuals: [`The Ljung-Box test`](https://en.wikipedia.org/wiki/Ljung%E2%80%93Box_test)*
+
+- The null hypothesis is that the serial correlations of the time series are zero. We use it in addition to visual interpretation of ACF/PACF plots.
+
+2. *To check for normality in residuals: [`The Jarque-Bera test`](https://en.wikipedia.org/wiki/Jarque-Bera_test)*
+
+- The null hypothesis is that the time series is normally distributed. We use it in addition to visual interpretation of plots like the residual distribution and the Q-Q plots.
+
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145392163-80007d25-8193-4ac8-ad4d-4d562c5bc81c.png)
+
+Points to note:
+    
+- There are no significant serial correlations until lag 12.
+- However, many of the correlations from lag 13 are below the red line.
+- So our model is not a good fit.
+
+The Jarque-Bera test
+
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145392710-a1723753-cde0-4f4b-ab77-84a995497ce2.png)
+
+
+
+## Automatically finding the best ARIMA fit (using the pmdarima library)
+
+Calling auto arima function and pass seasonal equals to false
+
+```bash
+  model = pm.auto_arima(train,
+                     error_action='ignore', trace=True,
+                     suppress_warnings=True, maxiter=10,
+                     seasonal=False)
+```
+Model summary
+
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145430315-aa67f4f6-eb2a-4e4e-947f-a4065ec6d29f.png)
+
+Points to note:
+- We can see that best model found is AIRMA(3,1,2).
+- The auto regressive component had order 3(last 3 days of data might be useful in predicting the next return)
+- The intergrated component has order 1 and moving average component has order 2
+
