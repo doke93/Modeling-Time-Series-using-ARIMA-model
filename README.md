@@ -154,6 +154,21 @@ Model summary
 
 Points to note:
 - We can see that best model found is AIRMA(3,1,2).
-- The auto regressive component had order 3(last 3 days of data might be useful in predicting the next return)
+- The auto regressive component has order 3(last 3 days of data might be useful in predicting the next return)
 - The intergrated component has order 1 and moving average component has order 2
+
+Next we will create a function 
+to plot the data itself, the fitted value for the in-sample data,
+forecast for the out-of-sample data and the confidence bound
+
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145439679-264915cb-1423-4c53-8abd-b42a14218ff2.png)
+
+Points to note:
+- The fitted model looks pretty good
+- It is too small to see our whether our forecast is good
+
+Therefore we write a function to plot only the test period,
+to see closely how well our model actually performs.
+
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145441076-cd8586e3-830f-47f3-ac66-5ffee3df37f8.png)
 
