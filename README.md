@@ -179,5 +179,23 @@ Points to note:
 - It does seem to capture the average quite well.
 - The true price is also within the confidence bounds 
 
-So finally we will check, do this model perform better than the naive forecast?
+So finally we will check, do this model perform better than the naive forecast,
+by using RMSE function.
+
+```bash
+    def rmse(y, t):
+    return np.sqrt(np.mean((t - y)**2))
+```
+
+![App Screenshot](https://user-images.githubusercontent.com/69301816/145532200-87965740-f6b5-4c83-9ed4-2f392be801d7.png)
+
+Points to note:
+- We can see that the naive forecast scores better than our model
+
+## Conclusion
+
+- We discovered that 12 days forecasts, are better predicted by the naive forecasts rather than the ARIMA
+- We now know how stock prices behaves from a statistical perspective.
+- Therefore we can conclude that stocks follow random walk   
+
 
