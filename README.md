@@ -2,15 +2,17 @@
 # Modeling-Time-Series-using-ARIMA-model
 
 
-Exploiting different standard temporal structures seen in time series processes
+- ARIMA model are pretty good at sales forecast, weather forecast and all kinds of time series data.
+- In this project we will check whether it is possible to predict stock prices using ARIMA model.
+- We will also learn about the fundamental characteristics of stock prices. 
+## The Naive Forecast
 
-## ARIMA vs Exponential Smoothing
-
-- Exponential Smoothing is very specific(Linear trend, Seasonality)
-
-- ARIMA imposes no such structure
-- It is more "machine learning"-like (where you take a model and try to fit it to your data, whatever structure your data may have)
-
+- In time series analysis, the simplest baseline is the naive forecast
+- What is Naive forecast ? 
+  that is to copy the previous known value forward in time. 
+- If the data follows a random walk, then the naive forecast is the **best forecast**.
+- If our model cannot beat the naive forecast then we can conclude that our model is actually **worse than a random walk model**
+- In other words, a random walk model describes the data better than our model.
 
 
 
@@ -27,9 +29,9 @@ Exploiting different standard temporal structures seen in time series processes
 ### Checking for stationarity
 
 There are three ways of checking for stationarity in a time series.
-1. Visual inspection
-2. Statistical tests
-3. ACF/PACF plots
+-  Visual inspection
+-  Statistical tests
+-  ACF/PACF plots
 
 ### 3. **Moving Average (MA)**:
 
@@ -171,4 +173,11 @@ Therefore we write a function to plot only the test period,
 to see closely how well our model actually performs.
 
 ![App Screenshot](https://user-images.githubusercontent.com/69301816/145441076-cd8586e3-830f-47f3-ac66-5ffee3df37f8.png)
+
+Points to note:
+- We see that our forecast is not that good.
+- It does seem to capture the average quite well.
+- The true price is also within the confidence bounds 
+
+So finally we will check, do this model perform better than the naive forecast?
 
